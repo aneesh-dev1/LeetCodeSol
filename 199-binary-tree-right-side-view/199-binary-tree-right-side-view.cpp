@@ -13,19 +13,20 @@ class Solution {
 public:
     vector<int> rightSideView(TreeNode* root) {
         vector<int> res;
-        solve(root,0,res);
+        rightMaker(root,res,0);
         return res;
     }
-    vector<int> solve(TreeNode* root, int level,vector<int> & res){
+    vector<int> rightMaker(TreeNode* root,vector<int> &res,int level){
         if(!root)
-            return {};
+            return res;
         if(res.size() == level){
-            res.push_back(root-> val);
+            res.push_back(root->val);
         }
-        solve(root->right,level+1,res);
-        solve(root->left,level+1,res);
+        rightMaker(root->right,res,level+1);
+        rightMaker(root->left,res,level+1);
         return res;
     }
+    
   
     
 };
