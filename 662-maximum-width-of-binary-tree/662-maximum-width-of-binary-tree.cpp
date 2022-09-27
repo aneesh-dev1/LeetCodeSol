@@ -20,21 +20,23 @@ public:
         while(!q.empty()){
             int size = q.size();
             int currMin = q.front().second;
-            int start,end;
+            int first,last;
             for(int i=0;i<size;i++){
                 TreeNode* node = q.front().first;
-                int min = q.front().second - currMin;
+                int newIndex = q.front().second - currMin;
                 q.pop();
-                if(i == 0)
-                    start = min;
-                if(i == size-1)
-                    end = min;
-                if(node -> left)
-                    q.push({node->left,(long long)min*2+1});
+                if(i == 0){
+                    first = newIndex;
+                }
+                if(i == size-1){
+                    last = newIndex;
+                }
+                if(node->left)
+                    q.push({node->left,(long long)newIndex*2+1});
                 if(node->right)
-                    q.push({node->right,(long long)min*2+2}); 
+                    q.push({node->right,(long long)newIndex*2+2});
             }
-            width = max(width,end-start+1);
+            width = max(width,last-first+1);
         }
         return width;
     }
