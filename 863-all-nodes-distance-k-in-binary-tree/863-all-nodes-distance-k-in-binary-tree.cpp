@@ -9,11 +9,12 @@
  */
 class Solution {
 private:
-    void parentPointer(TreeNode* root,map<TreeNode*,TreeNode*> &parent){
+    void parentPointer(TreeNode *root,map<TreeNode*,TreeNode*> &parent){
+        if(!root) return;
         queue<TreeNode*> q;
         q.push(root);
         while(!q.empty()){
-            TreeNode* node = q.front();
+            TreeNode * node = q.front();
             q.pop();
             if(node->left){
                 parent[node->left] = node;
@@ -27,39 +28,38 @@ private:
     }
 public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-       map<TreeNode*,TreeNode*> parent;
+        map<TreeNode*,TreeNode*> parent;
         parentPointer(root,parent);
         map<TreeNode*,bool> vis;
         vis[target] = true;
+        int dist = 0;
         queue<TreeNode*> q;
         q.push(target);
-        int dis = 0;
         while(!q.empty()){
             int size = q.size();
-            if(dis++ == k)
-                break;
+            if(dist++ == k) break;
             for(int i=0;i<size;i++){
-                TreeNode*node = q.front();
+                TreeNode* node = q.front();
                 q.pop();
                 if(node->left && !vis[node->left]){
-                    vis[node->left] = true;
                     q.push(node->left);
+                    vis[node->left] =true;
                 }
                 if(node->right && !vis[node->right]){
-                    vis[node->right] = true;
                     q.push(node->right);
+                    vis[node->right] =true;
                 }
                 if(parent[node] && !vis[parent[node]]){
-                    vis[parent[node]] = true;
                     q.push(parent[node]);
+                    vis[parent[node]] =true;
                 }
             }
         }
         vector<int> ans;
         while(!q.empty()){
-            TreeNode* a = q.front();
+            auto it = q.front();
             q.pop();
-            ans.push_back(a->val);
+            ans.push_back(it->val);
         }
         return ans;
     }
