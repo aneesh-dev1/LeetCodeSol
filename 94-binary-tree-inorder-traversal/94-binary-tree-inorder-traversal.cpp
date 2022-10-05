@@ -10,21 +10,30 @@
  * };
  */
 class Solution {
-    
-    
-    void inorder(TreeNode* head,vector<int> &res){
-        if(head==NULL)
-            return ;
-        inorder(head->left,res);
-        res.push_back(head->val);
-        inorder(head->right,res);
-    }
-    
-    
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        vector<int> res;
-        inorder(root,res);
-        return res;
+        vector<int> inorder;
+        while(root){
+            if(!root ->left){
+                inorder.push_back(root->val);
+                root = root -> right;
+            }
+            else{
+                TreeNode *rightMost = root->left;
+                while(rightMost -> right != root && rightMost ->right ){
+                    rightMost = rightMost ->right;
+                }
+                if(rightMost -> right != root){
+                    rightMost ->right  = root;
+                    root = root ->left;
+                }
+                else{
+                    rightMost -> right = NULL;
+                    inorder.push_back(root->val);
+                    root = root ->right;
+                }
+            }
+        }
+        return inorder;
     }
 };
