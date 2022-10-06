@@ -19,21 +19,33 @@ public:
        //  root->right = prev;
        //  root->left = NULL;
        //  prev = root;
-        if(!root)
-            return ;
-        stack<TreeNode*> st;
-        st.push(root);
-        while(!st.empty()){
-            TreeNode* temp = st.top();
-            st.pop();
-            if(temp -> right) 
-                st.push(temp->right);
-            if(temp -> left) 
-                st.push(temp -> left);
-            if(!st.empty()){
-                temp ->right = st.top();
+        // if(!root)
+        //     return ;
+        // stack<TreeNode*> st;
+        // st.push(root);
+        // while(!st.empty()){
+        //     TreeNode* temp = st.top();
+        //     st.pop();
+        //     if(temp -> right) 
+        //         st.push(temp->right);
+        //     if(temp -> left) 
+        //         st.push(temp -> left);
+        //     if(!st.empty()){
+        //         temp ->right = st.top();
+        //     }
+        //     temp -> left = NULL;
+        // }
+        TreeNode* curr = root;
+        while(curr){
+            if(curr -> left){
+                TreeNode* leftTree = curr -> left;
+                while(leftTree -> right)
+                    leftTree = leftTree -> right;
+                leftTree -> right = curr ->right;
+                curr->right = curr->left;
+                curr->left = NULL;
             }
-            temp -> left = NULL;
+            curr = curr ->right;
         }
     }
 };
