@@ -9,21 +9,14 @@
  * };
  */
 class Solution {
-private:
-    int length(ListNode* h){
-        if(!h)
-            return 0;
-        return 1+length(h->next);
-    }
 public:
     ListNode* middleNode(ListNode* head) {
         ListNode* slow = head;
         ListNode* fast = head;
-        int size = length(head);
-        while(fast->next && fast->next->next){
+        while(fast && fast->next){
             slow = slow ->next;
             fast = fast -> next ->next;
         }
-        return size&1?slow : slow->next;
+        return slow;
     }
 };
