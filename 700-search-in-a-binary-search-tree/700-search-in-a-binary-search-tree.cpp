@@ -19,9 +19,12 @@ public:
         // while(root && root->val!= val)
         //     root = root->val>val?root->left:root->right;
         // return root;
-        if(root== NULL) return NULL;
-        if(root->val == val) return root;
-        if(root->val > val) return searchBST(root->left, val);
-        return searchBST(root->right, val);
+        while (root)
+		{
+			if ( val < root->val ) root = root->left;
+			else if ( val > root->val ) root = root->right;
+			else return root;
+		}
+		return root;
     }
 };
