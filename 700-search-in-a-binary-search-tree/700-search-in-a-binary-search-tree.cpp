@@ -16,8 +16,11 @@ public:
         // if(root->val == val) return root;
         // else if(root->val>val) return searchBST(root->left,val);
         // else return searchBST(root->right,val);
-        while(root && root->val!= val)
-            root = root->val>val?root->left:root->right;
-        return root;
+        // while(root && root->val!= val)
+        //     root = root->val>val?root->left:root->right;
+        // return root;
+        if(root==NULL || root->val == val)
+            return root;
+        return (root->val > val)?searchBST(root->left,val):searchBST(root->right,val);
     }
 };
