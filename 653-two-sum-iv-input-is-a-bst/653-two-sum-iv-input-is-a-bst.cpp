@@ -14,9 +14,8 @@ private:
     void preOrder(TreeNode* root,vector<int> &pre){
         if(!root)
             return;
-        
-        preOrder(root->left,pre);
         pre.push_back(root->val);
+        preOrder(root->left,pre);
         preOrder(root->right,pre);
     }
 public:
@@ -24,7 +23,7 @@ public:
         vector<int> pre;
         preOrder(root,pre);
         int left = 0,right = pre.size()-1;
-        // sort(pre.begin(),pre.end());
+        sort(pre.begin(),pre.end());
         while(left<right){
             int sum = pre[left]+pre[right];
             if(sum == k)
