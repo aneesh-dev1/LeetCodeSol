@@ -22,12 +22,16 @@ public:
     bool findTarget(TreeNode* root, int k) {
         vector<int> pre;
         preOrder(root,pre);
-        unordered_set<int> s;
-        for(auto it:pre)
-            s.insert(it);
-        for(int i =0;i<pre.size();i++){
-            if(s.find(k-pre[i]) != s.end() && k-pre[i] != pre[i])
+        int left = 0,right = pre.size()-1;
+        sort(pre.begin(),pre.end());
+        while(left<right){
+            int sum = pre[left]+pre[right];
+            if(sum == k)
                 return true;
+            else if(sum<k)
+                left++;
+            else
+                right--;
         }
         return false;
     }
