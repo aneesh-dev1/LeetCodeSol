@@ -1,16 +1,15 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        long long  ans = 0;
-        for(long long int i=1;i<=x;i++){
-            if(i*i == x){
-                ans = i;
-            }
-            else if(i*i > x){
-                ans = i-1;
-                break;
-            }
+        long long int low=1,high=x;
+        while(low<=high){
+        long long int mid=low+(high-low)/2;
+            if(mid*mid==x)
+                return mid;
+            else if(mid*mid>x)
+                high=mid-1;
+            else low=mid+1;
         }
-        return ans;
+        return high;
     }
 };
