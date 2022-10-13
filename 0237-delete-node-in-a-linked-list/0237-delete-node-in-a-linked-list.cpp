@@ -9,7 +9,10 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        node -> val = node -> next -> val;
+        ios::sync_with_stdio(false);
+        cin.tie(0);
+        cout.tie(0);
+        node->val = node->next->val;
         node->next = node->next->next;
     }
 };
